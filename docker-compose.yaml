@@ -1,0 +1,26 @@
+version: '3'
+services:
+  wordpress:
+    image: wordpress
+    ports:
+      - "127.0.0.3:8080:80"
+    environment:
+      WORDPRESS_DB_HOST: db
+      WORDPRESS_DB_NAME: <your_database_name>
+      WORDPRESS_DB_USER: <your_mysql_user>
+      WORDPRESS_DB_PASSWORD: <your_mysql_user_password>
+    volumes:
+      - ./wp-content:/var/www/html/wp-content
+
+  db:
+    image: mysql:5.7
+    environment:
+      MYSQL_ROOT_PASSWORD: <your_mysql_root_password>
+      MYSQL_DATABASE: <your_database_name>
+      MYSQL_USER: <your_mysql_user>
+      MYSQL_PASSWORD: <your_mysql_user_password>
+    volumes:
+      - db-data:/var/lib/mysql
+
+volumes:
+  db-data:
